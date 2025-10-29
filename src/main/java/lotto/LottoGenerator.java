@@ -1,0 +1,28 @@
+package lotto;
+
+import static lotto.LottoConstants.LOTTO_NUMBER_COUNT;
+import static lotto.LottoConstants.MAX_LOTTO_NUMBER;
+import static lotto.LottoConstants.MIN_LOTTO_NUMBER;
+
+import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
+import java.util.List;
+
+public class LottoGenerator {
+    public List<Lotto> makeLottoTickets(Integer lottoCount) {
+        List<Lotto> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < lottoCount; i++) {
+            List<Integer> lottoNumbers = makeLottoNumbers();
+            Lotto lotto = new Lotto(lottoNumbers);
+
+            lottoTickets.add(lotto);
+        }
+
+        return lottoTickets;
+    }
+
+    public List<Integer> makeLottoNumbers() {
+        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER,
+                LOTTO_NUMBER_COUNT);
+    }
+}

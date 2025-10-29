@@ -1,25 +1,28 @@
 package lotto;
 
+import static lotto.LottoConstants.LOTTO_PRICE;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LottoManager {
-    private List<Lotto> lottos;
+    private List<Lotto> lottoTickets;
     private final InputParser inputParser;
+    private final LottoGenerator lottoGenerator;
 
     private Integer lottoCount;
     private List<Integer> winningNumbers;
     private Integer bonusNumber;
 
-
-
     public LottoManager() {
-        this.lottos = new ArrayList<>();
+        this.lottoTickets = new ArrayList<>();
         this.inputParser = new InputParser();
+        this.lottoGenerator = new LottoGenerator();
     }
 
     public void playGame() {
         this.lottoCount = getLottoCount();
+        this.lottoTickets = getLottoTickets();
 
         this.winningNumbers = getWinningNumbers();
         this.bonusNumber = getBonusNumber();
@@ -27,7 +30,11 @@ public class LottoManager {
 
     public Integer getLottoCount() {
         Integer money = inputParser.getMoney();
-        return money / 1000;
+        return money / LOTTO_PRICE;
+    }
+
+    public List<Lotto> getLottoTickets() {
+        return lottoGenerator.makeLottoTickets(lottoCount);
     }
 
     public List<Integer> getWinningNumbers() {
