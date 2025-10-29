@@ -14,10 +14,16 @@ public class LottoManager {
 
     public void playGame() {
         getLottoCount();
+
+        getWinningNumbers();
     }
 
     public void getLottoCount() {
         Integer money = inputParser.getMoney();
         this.lottoCount = money / 1000;
+    }
+
+    public List<Integer> getWinningNumbers() {
+        return inputParser.getWinningNumbers();
     }
 }
