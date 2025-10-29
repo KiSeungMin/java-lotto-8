@@ -1,10 +1,10 @@
-package lotto;
+package lotto.parser;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
-import static lotto.LottoConstants.LOTTO_NUMBER_COUNT;
-import static lotto.LottoConstants.LOTTO_PRICE;
-import static lotto.LottoConstants.MAX_LOTTO_NUMBER;
-import static lotto.LottoConstants.MIN_LOTTO_NUMBER;
+import static lotto.constants.LottoConstants.LOTTO_NUMBER_COUNT;
+import static lotto.constants.LottoConstants.LOTTO_PRICE;
+import static lotto.constants.LottoConstants.MAX_LOTTO_NUMBER;
+import static lotto.constants.LottoConstants.MIN_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.List;

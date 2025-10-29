@@ -1,9 +1,10 @@
-package lotto;
+package lotto.lotto;
 
-import static lotto.LottoConstants.LOTTO_PRICE;
+import static lotto.constants.LottoConstants.LOTTO_PRICE;
 
 import java.util.ArrayList;
 import java.util.List;
+import lotto.parser.InputParser;
 
 public class LottoManager {
     private List<Lotto> lottoTickets;
