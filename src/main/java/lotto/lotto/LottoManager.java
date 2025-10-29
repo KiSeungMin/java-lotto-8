@@ -19,10 +19,11 @@ public class LottoManager {
         lottoUserInfo.printLottoTickets();
 
         LottoWinningInfo lottoWinningInfo = makeLottoWinningInfo();
+        LottoStatistics.printLottoResult(lottoUserInfo, lottoWinningInfo);
     }
 
     public LottoUserInfo makeLottoUserInfo() {
-        Integer lottoCount = inputParser.getMoney() / 1000;
+        Integer lottoCount = inputParser.getMoney() / LOTTO_PRICE;
         List<Lotto> lottoTickets = lottoGenerator.makeLottoTickets(lottoCount);
 
         return new LottoUserInfo(lottoCount, lottoTickets);

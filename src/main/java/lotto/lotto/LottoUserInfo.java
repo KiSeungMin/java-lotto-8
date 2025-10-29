@@ -1,5 +1,7 @@
 package lotto.lotto;
 
+import static lotto.constants.LottoConstants.LOTTO_PRICE;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +10,12 @@ public class LottoUserInfo {
     private final List<Lotto> lottoTickets;
 
     public LottoUserInfo(Integer lottoCount, List<Lotto> lottoTickets) {
-        this.lottoTickets = new ArrayList<>();
         this.lottoCount = lottoCount;
+        this.lottoTickets = lottoTickets;
     }
 
     public Integer getMoney() {
-        return this.lottoCount * 1000;
+        return this.lottoCount * LOTTO_PRICE;
     }
 
     public Integer getLottoCount() {
