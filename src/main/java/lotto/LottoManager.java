@@ -22,10 +22,14 @@ public class LottoManager {
 
     public void playGame() {
         this.lottoCount = getLottoCount();
+
         this.lottoTickets = getLottoTickets();
+        printLottoTickets();
 
         this.winningNumbers = getWinningNumbers();
         this.bonusNumber = getBonusNumber();
+        
+
     }
 
     public Integer getLottoCount() {
@@ -35,6 +39,16 @@ public class LottoManager {
 
     public List<Lotto> getLottoTickets() {
         return lottoGenerator.makeLottoTickets(lottoCount);
+    }
+
+    public void printLottoTickets() {
+        System.out.println(lottoCount + "개를 구매했습니다.");
+
+        for (Lotto lotto : lottoTickets) {
+            System.out.println(lotto.toString());
+        }
+
+        System.out.println();
     }
 
     public List<Integer> getWinningNumbers() {

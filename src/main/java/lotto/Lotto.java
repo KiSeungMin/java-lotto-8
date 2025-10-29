@@ -17,4 +17,18 @@ public class Lotto {
     }
 
     // TODO: 추가 기능 구현
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        for (Integer num : numbers) {
+            result.append(num).append(", ");
+        }
+
+        if (result.length() > 1) {
+            result.setLength(result.length() - 2);
+        }
+        result.append("]");
+
+        return result.toString();
+    }
 }
