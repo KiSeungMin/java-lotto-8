@@ -1,11 +1,17 @@
 package lotto;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
+import static lotto.LottoConstants.LOTTO_NUMBER_COUNT;
+import static lotto.LottoConstants.LOTTO_PRICE;
+import static lotto.LottoConstants.MAX_LOTTO_NUMBER;
+import static lotto.LottoConstants.MIN_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputParser {
+
+
     public Integer getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
@@ -71,23 +77,23 @@ public class InputParser {
     }
 
     public void validateMoney(Integer money) {
-        if (money % 1000 != 0) {
+        if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("[ERROR] 금액은 천 원 단위입니다.");
         }
 
-        if(money / 1000 < 1) {
+        if(money / LOTTO_PRICE < 1) {
             throw new IllegalArgumentException("[ERROR] 금액은 천 원 이상입니다.");
         }
     }
 
     public void validateNumbers(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개의 정수여야 합니다.");
         }
     }
 
     public void validateNumber(Integer number) {
-        if (number < 1 || number > 45) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 1부터 45 사이의 정수입니다.");
         }
     }
