@@ -2,70 +2,36 @@ package lotto.lotto;
 
 import static lotto.constants.LottoConstants.LOTTO_PRICE;
 
-import java.util.ArrayList;
 import java.util.List;
 import lotto.parser.InputParser;
 
 public class LottoManager {
-    private List<Lotto> lottoTickets;
     private final InputParser inputParser;
     private final LottoGenerator lottoGenerator;
 
-    private Integer lottoCount;
-    private List<Integer> winningNumbers;
-    private Integer bonusNumber;
-
     public LottoManager() {
-        this.lottoTickets = new ArrayList<>();
         this.inputParser = new InputParser();
         this.lottoGenerator = new LottoGenerator();
     }
 
     public void playGame() {
-        this.lottoCount = getLottoCount();
+        LottoUserInfo lottoUserInfo = makeLottoUserInfo();
+        lottoUserInfo.printLottoTickets();
 
-        this.lottoTickets = getLottoTickets();
-        printLottoTickets();
-
-        this.winningNumbers = getWinningNumbers();
-        this.bonusNumber = getBonusNumber();
-        
-
+        LottoWinningInfo lottoWinningInfo = makeLottoWinningInfo();
     }
 
-    public Integer getLottoCount() {
-        Integer money = inputParser.getMoney();
-        return money / LOTTO_PRICE;
+    public LottoUserInfo makeLottoUserInfo() {
+        Integer lottoCount = inputParser.getMoney() / 1000;
+        List<Lotto> lottoTickets = lottoGenerator.makeLottoTickets(lottoCount);
+
+        return new LottoUserInfo(lottoCount, lottoTickets);
     }
 
-    public List<Lotto> getLottoTickets() {
-        return lottoGenerator.makeLottoTickets(lottoCount);
-    }
-
-    public void printLottoTickets() {
-        System.out.println(lottoCount + "개를 구매했습니다.");
-
-        for (Lotto lotto : lottoTickets) {
-            System.out.println(lotto.toString());
-        }
-
-        System.out.println();
-    }
-
-    public List<Integer> getWinningNumbers() {
-        return inputParser.getWinningNumbers();
-    }
-
-    public Integer getBonusNumber() {
+    public LottoWinningInfo makeLottoWinningInfo() {
+        List<Integer> winningNumbers = inputParser.getWinningNumbers();
         Integer bonusNumber = inputParser.getBonusNumber();
-        validateBonusNumber(bonusNumber);
 
-        return bonusNumber;
-    }
-
-    public void validateBonusNumber(Integer bonusNumber) {
-        if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호가 이미 당첨 번호에 포함되어 있습니다.");
-        }
+        return new LottoWinningInfo(winningNumbers, bonusNumber);
     }
 }
