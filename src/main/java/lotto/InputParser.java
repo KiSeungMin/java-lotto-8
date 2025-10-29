@@ -4,9 +4,6 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.stream.Collectors;
 
 public class InputParser {
     public Integer getMoney() {
@@ -22,16 +19,6 @@ public class InputParser {
         }
     }
 
-    public void validateMoney(Integer money) {
-        if (money % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 금액은 천 원 단위입니다.");
-        }
-
-        if(money / 1000 < 1) {
-            throw new IllegalArgumentException("[ERROR] 금액은 천 원 이상입니다.");
-        }
-    }
-
     public List<Integer> getWinningNumbers() {
         System.out.println("당첨 번호를 입력해 주세요.");
         try {
@@ -44,6 +31,19 @@ public class InputParser {
             return winningNumbers;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 숫자 형태의 당첨 번호를 입력해주세요.");
+        }
+    }
+
+    public Integer getBonusNumber() {
+        System.out.println("보너스 번호를 입력해 주세요.");
+        try {
+            String input = readLine();
+            Integer number = Integer.parseInt(input);
+            validateNumber(number);
+
+            return number;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 숫자 형태의 보너스 번호를 입력해주세요.");
         }
     }
 
@@ -68,6 +68,16 @@ public class InputParser {
                 .distinct()
                 .sorted()
                 .toList();
+    }
+
+    public void validateMoney(Integer money) {
+        if (money % 1000 != 0) {
+            throw new IllegalArgumentException("[ERROR] 금액은 천 원 단위입니다.");
+        }
+
+        if(money / 1000 < 1) {
+            throw new IllegalArgumentException("[ERROR] 금액은 천 원 이상입니다.");
+        }
     }
 
     public void validateNumbers(List<Integer> numbers) {
