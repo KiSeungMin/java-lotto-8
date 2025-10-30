@@ -8,6 +8,7 @@ import static lotto.constants.LottoConstants.MIN_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputParser {
 
@@ -32,6 +33,7 @@ public class InputParser {
 
             String[] numberTokens = input.split(",");
             List<Integer> winningNumbers = convertToInteger(numberTokens);
+            validateWinningNumbers(winningNumbers);
 
             return winningNumbers;
         } catch (NumberFormatException e) {
@@ -72,6 +74,17 @@ public class InputParser {
 
         if(money / LOTTO_PRICE < 1) {
             throw new IllegalArgumentException("[ERROR] 금액은 천 원 이상입니다.");
+        }
+    }
+
+    public void validateWinningNumbers(List<Integer> winningNumbers) {
+        List<Integer> distinctWinningNumbers = winningNumbers.stream().distinct().toList();
+
+        if (distinctWinningNumbers.size() != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개의 정수로 구성되어야 합니다.");
+        }
+        if (winningNumbers.size() != distinctWinningNumbers.size()) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복되지 않아야 합니다.");
         }
     }
 
