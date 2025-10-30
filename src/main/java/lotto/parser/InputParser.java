@@ -1,6 +1,7 @@
 package lotto.parser;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
+import static lotto.exception.ExceptionMessage.*;
 import static lotto.constants.LottoConstants.LOTTO_NUMBER_COUNT;
 import static lotto.constants.LottoConstants.LOTTO_PRICE;
 import static lotto.constants.LottoConstants.MAX_LOTTO_NUMBER;
@@ -8,7 +9,6 @@ import static lotto.constants.LottoConstants.MIN_LOTTO_NUMBER;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InputParser {
 
@@ -22,7 +22,7 @@ public class InputParser {
 
                 return money;
             } catch (NumberFormatException e) {
-                System.out.println("[ERROR] 숫자 형태의 금액을 입력해주세요.");
+                System.out.println(INVALID_MONEY_FORMAT);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -42,7 +42,7 @@ public class InputParser {
 
                 return winningNumbers;
             } catch (NumberFormatException e) {
-                System.out.println("[ERROR] 숫자 형태의 당첨 번호를 입력해주세요.");
+                System.out.println(INVALID_WINNING_NUMBER_FORMAT);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -60,7 +60,7 @@ public class InputParser {
 
                 return number;
             } catch (NumberFormatException e) {
-                System.out.println("[ERROR] 숫자 형태의 보너스 번호를 입력해주세요.");
+                System.out.println(INVALID_BONUS_NUMBER_FORMAT);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -82,11 +82,11 @@ public class InputParser {
 
     public void validateMoney(Integer money) {
         if (money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("[ERROR] 금액은 천 원 단위입니다.");
+            throw new IllegalArgumentException(INVALID_MONEY_UNIT);
         }
 
         if(money / LOTTO_PRICE < 1) {
-            throw new IllegalArgumentException("[ERROR] 금액은 천 원 이상입니다.");
+            throw new IllegalArgumentException(INVALID_MONEY_MINIMUM);
         }
     }
 
@@ -94,10 +94,10 @@ public class InputParser {
         List<Integer> distinctWinningNumbers = winningNumbers.stream().distinct().toList();
 
         if (distinctWinningNumbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개의 정수로 구성되어야 합니다.");
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBER_COUNT);
         }
         if (winningNumbers.size() != distinctWinningNumbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복되지 않아야 합니다.");
+            throw new IllegalArgumentException(INVALID_WINNING_NUMBER_DUPLICATE);
         }
     }
 
@@ -105,13 +105,13 @@ public class InputParser {
         validateNumber(bonusNumber);
 
         if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호에 포함되어 있지 않아야 합니다.");
+            throw new IllegalArgumentException(INVALID_BONUS_NUMBER_DUPLICATE);
         }
     }
 
     public void validateNumber(Integer number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 1부터 45 사이의 정수입니다.");
+            throw new IllegalArgumentException(INVALID_NUMBER_RANGE);
         }
     }
 }

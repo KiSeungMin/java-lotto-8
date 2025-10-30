@@ -1,5 +1,7 @@
 package lotto.lotto;
 
+import static lotto.exception.ExceptionMessage.INVALID_BONUS_NUMBER_DUPLICATE;
+
 import java.util.List;
 
 public class LottoWinningInfo {
@@ -23,7 +25,7 @@ public class LottoWinningInfo {
 
     public void validateBonusNumber(Integer bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호가 이미 당첨 번호에 포함되어 있습니다.");
+            throw new IllegalArgumentException(INVALID_BONUS_NUMBER_DUPLICATE);
         }
     }
 }

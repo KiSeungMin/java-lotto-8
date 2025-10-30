@@ -1,5 +1,7 @@
 package lotto.lotto;
 
+import static lotto.exception.ExceptionMessage.INVALID_LOTTO_NUMBER_COUNT;
+import static lotto.exception.ExceptionMessage.INVALID_LOTTO_NUMBER_DUPLICATE;
 import static lotto.constants.LottoConstants.LOTTO_NUMBER_COUNT;
 
 import java.util.List;
@@ -14,7 +16,7 @@ public class Lotto {
 
     private void validate(List<Integer> numbers) {
         if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_COUNT);
         }
 
         List<Integer> distinctNumbers = numbers.stream()
@@ -22,7 +24,7 @@ public class Lotto {
                 .toList();
 
         if (numbers.size() != distinctNumbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(INVALID_LOTTO_NUMBER_DUPLICATE);
         }
     }
 
