@@ -1,6 +1,8 @@
 package lotto.lotto;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class LottoStatistics {
@@ -21,10 +23,7 @@ public class LottoStatistics {
         System.out.println(lottoUserInfo.getLottoCount() + "개를 구매했습니다.");
 
         lottoRewardInfo.printUserReward();
-    }
-
-    public BigDecimal getReward() {
-        return lottoRewardInfo.getTotalReward();
+        printYield();
     }
 
     public void calculateAllTickets() {
@@ -50,5 +49,21 @@ public class LottoStatistics {
             matchingBonusNumber = lottoNumbers.contains(bonusNumber);
         }
         return Reward.valueOf(matchingCount, matchingBonusNumber).getIndex();
+    }
+
+    public void printYield() {
+        System.out.println("총 수익률은 " + getYield() + "%입니다.");
+    }
+
+    public BigDecimal getYield() {
+        BigDecimal reward = getReward();
+        reward = reward.multiply(BigDecimal.valueOf(100));
+        BigDecimal yield = reward.divide(BigDecimal.valueOf(lottoUserInfo.getMoney()), 1, RoundingMode.HALF_UP);
+
+        return yield;
+    }
+
+    public BigDecimal getReward() {
+        return lottoRewardInfo.getTotalReward();
     }
 }
