@@ -14,7 +14,6 @@ public class LottoGenerator {
         List<Lotto> lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             List<Integer> lottoNumbers = makeLottoNumbers();
-            lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toList());
 
             Lotto lotto = new Lotto(lottoNumbers);
             lottoTickets.add(lotto);
@@ -24,7 +23,10 @@ public class LottoGenerator {
     }
 
     public List<Integer> makeLottoNumbers() {
-        return Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER,
+        List<Integer> lottoNumbers = Randoms.pickUniqueNumbersInRange(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER,
                 LOTTO_NUMBER_COUNT);
+
+        lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toList());
+        return lottoNumbers;
     }
 }

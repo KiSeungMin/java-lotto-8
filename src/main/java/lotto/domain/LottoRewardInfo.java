@@ -24,7 +24,10 @@ public class LottoRewardInfo {
     public BigDecimal getTotalReward() {
         BigDecimal totalReward = new BigDecimal(0);
         for (int i = 1; i <= REWARD_LIMIT; i++) {
-            totalReward = totalReward.add(BigDecimal.valueOf(rankCounts.get(i) * Reward.values()[i].getPrize()));
+            long prize = Reward.values()[i].getPrize();
+            BigDecimal reward = BigDecimal.valueOf(rankCounts.get(i) * prize);
+
+            totalReward = totalReward.add(reward);
         }
         return totalReward;
     }
@@ -36,9 +39,9 @@ public class LottoRewardInfo {
     }
 
     public String getRankRewardMessage(Integer rank) {
-        Reward rewardEnum = Reward.values()[rank];
+        Reward reward = Reward.values()[rank];
 
-        String rewardMessage = rewardEnum.getMessage();
+        String rewardMessage = reward.getMessage();
 
         rewardMessage = rewardMessage.concat(String.valueOf(rankCounts.get(rank)));
         rewardMessage = rewardMessage.concat("개");
