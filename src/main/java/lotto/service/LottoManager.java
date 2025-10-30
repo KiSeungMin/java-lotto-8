@@ -4,7 +4,6 @@ import static lotto.constants.LottoConstants.LOTTO_PRICE;
 
 import java.util.List;
 import lotto.domain.Lotto;
-import lotto.domain.LottoGenerator;
 import lotto.domain.LottoUserInfo;
 import lotto.domain.LottoWinningInfo;
 import lotto.view.InputParser;

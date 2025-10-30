@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.service;
 
 import static lotto.constants.LottoConstants.LOTTO_NUMBER_COUNT;
 import static lotto.constants.LottoConstants.MAX_LOTTO_NUMBER;
@@ -8,6 +8,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import lotto.domain.Lotto;
 
 public class LottoGenerator {
     public List<Lotto> makeLottoTickets(Integer lottoCount) {
