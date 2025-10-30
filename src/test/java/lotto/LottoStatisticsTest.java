@@ -1,10 +1,12 @@
 package lotto;
 
+import static lotto.constants.LottoConstants.LOTTO_PRICE;
 import static lotto.constants.LottoRewardConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.lotto.Lotto;
@@ -92,6 +94,26 @@ public class LottoStatisticsTest extends NsTest {
                 "5개 일치 (1,500,000원) - 1개",
                 "5개 일치, 보너스 볼 일치 (30,000,000원) - 1개",
                 "6개 일치 (2,000,000,000원) - 2개"
+        );
+    }
+
+    @Test
+    public void 수익률_출력_테스트() {
+        lottoStatistics.calculateAllTickets();
+        lottoStatistics.printLottoResult();
+
+        BigDecimal reward = new BigDecimal(0);
+        reward = reward.add(BigDecimal.valueOf(FIRST_PRIZE_REWARD * 2));
+        reward = reward.add(BigDecimal.valueOf(SECOND_PRIZE_REWARD));
+        reward = reward.add(BigDecimal.valueOf(THIRD_PRIZE_REWARD));
+        reward = reward.add(BigDecimal.valueOf(FOURTH_PRIZE_REWARD));
+        reward = reward.add(BigDecimal.valueOf(FIFTH_PRIZE_REWARD));
+
+        reward = reward.multiply(BigDecimal.valueOf(100));
+        BigDecimal yield = reward.divide(BigDecimal.valueOf(lottoTickets.size() * LOTTO_PRICE), 1, RoundingMode.HALF_UP);
+
+        assertThat(output()).contains(
+                "총 수익률은 " + yield + "%입니다."
         );
     }
 
