@@ -21,6 +21,7 @@ public class LottoManager {
         LottoWinningInfo lottoWinningInfo = makeLottoWinningInfo();
 
         LottoStatistics lottoStatistics = new LottoStatistics(lottoUserInfo, lottoWinningInfo);
+        lottoStatistics.calculateAllTickets();
         lottoStatistics.printLottoResult();
     }
 

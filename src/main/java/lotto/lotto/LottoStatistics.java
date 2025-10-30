@@ -1,7 +1,5 @@
 package lotto.lotto;
 
-import static lotto.constants.LottoConstants.REWARD_LIMIT;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -18,7 +16,11 @@ public class LottoStatistics {
     }
 
     public void printLottoResult() {
-        calculateAllTickets();
+        System.out.println("당첨 통계");
+        System.out.println("---");
+        System.out.println(lottoUserInfo.getLottoCount() + "개를 구매했습니다.");
+
+        lottoRewardInfo.printUserReward();
     }
 
     public BigDecimal getReward() {
@@ -47,7 +49,6 @@ public class LottoStatistics {
         if (matchingCount == 5) {
             matchingBonusNumber = lottoNumbers.contains(bonusNumber);
         }
-
-        return Rank.valueOf(matchingCount, matchingBonusNumber).getIndex();
+        return Reward.valueOf(matchingCount, matchingBonusNumber).getIndex();
     }
 }
