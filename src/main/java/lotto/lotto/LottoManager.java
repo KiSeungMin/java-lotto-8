@@ -19,7 +19,9 @@ public class LottoManager {
         lottoUserInfo.printLottoTickets();
 
         LottoWinningInfo lottoWinningInfo = makeLottoWinningInfo();
-        LottoStatistics.printLottoResult(lottoUserInfo, lottoWinningInfo);
+
+        LottoStatistics lottoStatistics = new LottoStatistics(lottoUserInfo, lottoWinningInfo);
+        lottoStatistics.printLottoResult();
     }
 
     public LottoUserInfo makeLottoUserInfo() {
