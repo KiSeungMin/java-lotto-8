@@ -1,8 +1,13 @@
-package lotto.lotto;
+package lotto.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
+import lotto.domain.Lotto;
+import lotto.domain.LottoRewardInfo;
+import lotto.domain.LottoUserInfo;
+import lotto.domain.LottoWinningInfo;
+import lotto.domain.Reward;
 
 public class LottoStatistics {
 

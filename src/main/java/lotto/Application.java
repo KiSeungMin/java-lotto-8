@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.lotto.LottoManager;
+import lotto.service.LottoManager;
 
 public class Application {
     public static void main(String[] args) {
