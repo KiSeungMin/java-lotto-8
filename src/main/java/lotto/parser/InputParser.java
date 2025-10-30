@@ -34,12 +34,8 @@ public class InputParser {
             System.out.println("당첨 번호를 입력해 주세요.");
             try {
                 String input = readLine();
-                input = input.replace(" ", "");
 
-                String[] numberTokens = input.split(",");
-                List<Integer> winningNumbers = convertToInteger(numberTokens);
-                validateWinningNumbers(winningNumbers);
-
+                List<Integer> winningNumbers = getWinningNumbersFromInput(input);
                 return winningNumbers;
             } catch (NumberFormatException e) {
                 System.out.println(INVALID_WINNING_NUMBER_FORMAT);
@@ -67,6 +63,16 @@ public class InputParser {
         }
     }
 
+    public List<Integer> getWinningNumbersFromInput(String input) {
+        input = input.replace(" ", "");
+
+        String[] numberTokens = input.split(",");
+        List<Integer> winningNumbers = convertToInteger(numberTokens);
+        validateWinningNumbers(winningNumbers);
+
+        return winningNumbers;
+    }
+
     public List<Integer> convertToInteger(String[] numberTokens) {
         List<Integer> numbers = new ArrayList<>();
 
@@ -80,7 +86,7 @@ public class InputParser {
         return numbers;
     }
 
-    public void validateMoney(Integer money) {
+    private void validateMoney(Integer money) {
         if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException(INVALID_MONEY_UNIT);
         }
@@ -90,7 +96,7 @@ public class InputParser {
         }
     }
 
-    public void validateWinningNumbers(List<Integer> winningNumbers) {
+    private void validateWinningNumbers(List<Integer> winningNumbers) {
         List<Integer> distinctWinningNumbers = winningNumbers.stream().distinct().toList();
 
         if (distinctWinningNumbers.size() != LOTTO_NUMBER_COUNT) {
@@ -101,7 +107,7 @@ public class InputParser {
         }
     }
 
-    public void validateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
+    private void validateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
         validateNumber(bonusNumber);
 
         if (winningNumbers.contains(bonusNumber)) {
@@ -109,7 +115,7 @@ public class InputParser {
         }
     }
 
-    public void validateNumber(Integer number) {
+    private void validateNumber(Integer number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(INVALID_NUMBER_RANGE);
         }

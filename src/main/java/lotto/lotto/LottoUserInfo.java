@@ -2,7 +2,6 @@ package lotto.lotto;
 
 import static lotto.constants.LottoConstants.LOTTO_PRICE;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoUserInfo {

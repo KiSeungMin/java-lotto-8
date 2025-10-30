@@ -5,8 +5,8 @@ import static lotto.exception.ExceptionMessage.INVALID_BONUS_NUMBER_DUPLICATE;
 import java.util.List;
 
 public class LottoWinningInfo {
-    private List<Integer> winningNumbers;
-    private Integer bonusNumber;
+    private final List<Integer> winningNumbers;
+    private final Integer bonusNumber;
 
     public LottoWinningInfo(List<Integer> winningNumbers, Integer bonusNumber) {
         this.winningNumbers = winningNumbers;
@@ -23,7 +23,7 @@ public class LottoWinningInfo {
         return bonusNumber;
     }
 
-    public void validateBonusNumber(Integer bonusNumber) {
+    private void validateBonusNumber(Integer bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException(INVALID_BONUS_NUMBER_DUPLICATE);
         }
