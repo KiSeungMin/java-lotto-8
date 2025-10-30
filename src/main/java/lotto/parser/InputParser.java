@@ -13,44 +13,56 @@ import java.util.stream.Collectors;
 public class InputParser {
 
     public Integer getMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
-        try {
-            String input = readLine();
-            Integer money = Integer.parseInt(input);
-            validateMoney(money);
+        while (true) {
+            System.out.println("구입금액을 입력해 주세요.");
+            try {
+                String input = readLine();
+                Integer money = Integer.parseInt(input);
+                validateMoney(money);
 
-            return money;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 숫자 형태의 금액을 입력해주세요.");
+                return money;
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR] 숫자 형태의 금액을 입력해주세요.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
     public List<Integer> getWinningNumbers() {
-        System.out.println("당첨 번호를 입력해 주세요.");
-        try {
-            String input = readLine();
-            input = input.replace(" ", "");
+        while (true) {
+            System.out.println("당첨 번호를 입력해 주세요.");
+            try {
+                String input = readLine();
+                input = input.replace(" ", "");
 
-            String[] numberTokens = input.split(",");
-            List<Integer> winningNumbers = convertToInteger(numberTokens);
-            validateWinningNumbers(winningNumbers);
+                String[] numberTokens = input.split(",");
+                List<Integer> winningNumbers = convertToInteger(numberTokens);
+                validateWinningNumbers(winningNumbers);
 
-            return winningNumbers;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 숫자 형태의 당첨 번호를 입력해주세요.");
+                return winningNumbers;
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR] 숫자 형태의 당첨 번호를 입력해주세요.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
     public Integer getBonusNumber() {
-        System.out.println("보너스 번호를 입력해 주세요.");
-        try {
-            String input = readLine();
-            Integer number = Integer.parseInt(input);
-            validateNumber(number);
+        while (true) {
+            System.out.println("보너스 번호를 입력해 주세요.");
+            try {
+                String input = readLine();
+                Integer number = Integer.parseInt(input);
+                validateNumber(number);
 
-            return number;
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 숫자 형태의 보너스 번호를 입력해주세요.");
+                return number;
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR] 숫자 형태의 보너스 번호를 입력해주세요.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 
