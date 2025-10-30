@@ -7,14 +7,16 @@ import static lotto.constants.LottoConstants.MIN_LOTTO_NUMBER;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGenerator {
     public List<Lotto> makeLottoTickets(Integer lottoCount) {
         List<Lotto> lottoTickets = new ArrayList<>();
         for (int i = 0; i < lottoCount; i++) {
             List<Integer> lottoNumbers = makeLottoNumbers();
-            Lotto lotto = new Lotto(lottoNumbers);
+            lottoNumbers = lottoNumbers.stream().sorted().collect(Collectors.toList());
 
+            Lotto lotto = new Lotto(lottoNumbers);
             lottoTickets.add(lotto);
         }
 

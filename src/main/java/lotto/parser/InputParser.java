@@ -11,7 +11,6 @@ import java.util.List;
 
 public class InputParser {
 
-
     public Integer getMoney() {
         System.out.println("구입금액을 입력해 주세요.");
         try {
@@ -63,17 +62,7 @@ public class InputParser {
             numbers.add(number);
         }
 
-        numbers = transformNumbers(numbers);
-        validateNumbers(numbers);
-
         return numbers;
-    }
-
-    public List<Integer> transformNumbers(List<Integer> numbers) {
-        return numbers.stream()
-                .distinct()
-                .sorted()
-                .toList();
     }
 
     public void validateMoney(Integer money) {
@@ -83,12 +72,6 @@ public class InputParser {
 
         if(money / LOTTO_PRICE < 1) {
             throw new IllegalArgumentException("[ERROR] 금액은 천 원 이상입니다.");
-        }
-    }
-
-    public void validateNumbers(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개의 정수여야 합니다.");
         }
     }
 
