@@ -49,13 +49,14 @@ public class InputParser {
         }
     }
 
-    public Integer getBonusNumber() {
+    public Integer getBonusNumber(List<Integer> winningNumbers) {
         while (true) {
             System.out.println("보너스 번호를 입력해 주세요.");
             try {
                 String input = readLine();
                 Integer number = Integer.parseInt(input);
-                validateNumber(number);
+
+                validateBonusNumber(winningNumbers, number);
 
                 return number;
             } catch (NumberFormatException e) {
@@ -97,6 +98,14 @@ public class InputParser {
         }
         if (winningNumbers.size() != distinctWinningNumbers.size()) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 중복되지 않아야 합니다.");
+        }
+    }
+
+    public void validateBonusNumber(List<Integer> winningNumbers, Integer bonusNumber) {
+        validateNumber(bonusNumber);
+
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호에 포함되어 있지 않아야 합니다.");
         }
     }
 

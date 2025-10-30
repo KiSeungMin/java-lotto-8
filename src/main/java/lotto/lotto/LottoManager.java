@@ -34,7 +34,7 @@ public class LottoManager {
 
     public LottoWinningInfo makeLottoWinningInfo() {
         List<Integer> winningNumbers = inputParser.getWinningNumbers();
-        Integer bonusNumber = inputParser.getBonusNumber();
+        Integer bonusNumber = inputParser.getBonusNumber(winningNumbers);
 
         return new LottoWinningInfo(winningNumbers, bonusNumber);
     }
